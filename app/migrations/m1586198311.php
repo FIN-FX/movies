@@ -20,8 +20,8 @@ class m1586198311
             CREATE TABLE IF NOT EXISTS `'.self::TABLE.'` (
               `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
               `title` varchar(100) NOT NULL,
-              `description` varchar(100) DEFAULT \'\',
-              `poster` blob,
+              `description` varchar(255) DEFAULT \'\',
+              `poster` longtext,
               `created_at` int(11) NOT NULL,
               PRIMARY KEY (`id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

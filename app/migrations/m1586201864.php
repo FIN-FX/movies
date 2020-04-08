@@ -20,6 +20,8 @@ class m1586201864
               `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
               `id_movie` int(11) NOT NULL,
               `id_client` int(11) NOT NULL,
+              `id_session` int(11) NOT NULL,
+              `place` varchar(10) NOT NULL,
               `created_at` int(11) NOT NULL,
               PRIMARY KEY (`id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

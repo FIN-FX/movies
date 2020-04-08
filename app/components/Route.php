@@ -8,14 +8,26 @@
 
 namespace app\components;
 
+use app\models\forms\Login as LoginForm;
+
 class Route
 {
     public static $isAdmin = false;
+
+    /**
+     * @var View
+     */
+    protected $view;
 
     protected $page;
 
     public function init() : void
     {
+        session_start();
+
+        $form = new LoginForm();
+        self::$isAdmin = $form->isAuthorized();
+
         $data = new Urls();
         $parsed = parse_url($_SERVER['REQUEST_URI']);
         $path = $parsed['path'] ?? '';
@@ -33,6 +45,7 @@ class Route
         $actionName = "app\\actions\\{$this->page}";
         /** @var Route $instance */
         $instance = (new $actionName);
+        $instance->view = new View();
         $instance->beforeRun();
         if (method_exists($instance, 'run')) {
             call_user_func_array([$instance, 'run'], $params);

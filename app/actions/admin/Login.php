@@ -9,36 +9,25 @@
 namespace app\actions\admin;
 
 use app\components\Route;
-use app\components\View;
+use app\models\forms\Login as LoginForm;
 
 class Login extends Route
 {
     public function run() : void
     {
-        session_start();
-        $error = '';
-        $hash = $_COOKIE['hash'] ?? '';
-        if (!empty($hash) && sha1(ADMIN_EMAIL.ADMIN_PASSWORD.session_id()) === $_COOKIE['hash']) {
-            header('Location: admin-movies');
+        $form = new LoginForm();
+        if (self::$isAdmin) {
+            header('Location: /');
             exit;
         }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (
-                isset($_POST['email']) &&
-                trim($_POST['email']) === ADMIN_EMAIL &&
-                isset($_POST['password']) &&
-                sha1(trim($_POST['password'])) === ADMIN_PASSWORD
-            ) {
-                setcookie("hash", sha1(ADMIN_EMAIL.ADMIN_PASSWORD.session_id()), time()+60*60*24*30, "/", null, null, true);
-                header('Location: admin-movies');
+            if ($form->login()) {
+                header('Location: /');
                 exit;
-            } else {
-                $error = 'Incorrect email or password';
             }
         }
-        $view = new View();
-        $view->load("admin/login", [
-            'error' => $error,
+        $this->view->load("admin/login", [
+            'error' => $form->error,
             'email' => $_POST['email'] ?? ''
         ]);
     }

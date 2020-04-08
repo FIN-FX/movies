@@ -9,13 +9,17 @@
 namespace app\actions;
 
 use app\components\Route;
-use app\components\View;
+use app\models\Movie;
 
 class Index extends Route
 {
     public function run() : void
     {
-        $view = new View();
-        $view->load("index");
+        $popular = Movie::findPopular();
+        $models = Movie::findAll();
+        $this->view->load("index", [
+            'popular' => $popular,
+            'models' => $models
+        ]);
     }
 }

@@ -6,10 +6,9 @@
  * Time: 22:07
  */
 
-define('DIR', realpath(dirname(__FILE__)));
-require_once DIR . '/../bootstrap.php';
+require_once realpath(dirname(__FILE__)).'/../bootstrap.php';
 
-foreach (glob(DIR . '/[!up]*.php') as $filename)
+foreach (glob(realpath(dirname(__FILE__)) . '/[!up]*.php') as $filename)
 {
     include_once $filename;
     $class = str_replace('.php', '', basename($filename));

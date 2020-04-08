@@ -14,12 +14,9 @@ class Auth extends Route
 {
     protected function beforeRun(): void
     {
-        session_start();
-        $hash = $_COOKIE['hash'] ?? '';
-        if (empty($hash) || sha1(ADMIN_EMAIL.ADMIN_PASSWORD.session_id()) !== $_COOKIE['hash']) {
+        if (!self::$isAdmin) {
             header('Location: '.ADMIN_LOGIN_URL);
             exit;
         }
-        self::$isAdmin = true;
     }
 }

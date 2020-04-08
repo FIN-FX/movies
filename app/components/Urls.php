@@ -16,11 +16,15 @@ class Urls
     {
         $this->data = [
             'pages' => [
-                'default'       => 'Index',
-                'index'         => 'Index',
-                'admin-movies'  => 'admin\\Movies',
-                'admin-login'   => 'admin\\Login',
-                'admin-logout'   => 'admin\\Logout'
+                'default'           => 'Index',
+                'index'             => 'Index',
+                'details'           => 'Details',
+                'order'             => 'Order',
+                'admin-login'       => 'admin\\Login',
+                'admin-logout'      => 'admin\\Logout',
+                'admin-create-movie'   => 'admin\\CreateMovie',
+                'admin-update-movie'   => 'admin\\UpdateMovie',
+                'admin-delete-movie'   => 'admin\\DeleteMovie'
             ],
         ];
     }

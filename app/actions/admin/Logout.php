@@ -11,8 +11,15 @@ namespace app\actions\admin;
 use app\components\admin\Auth;
 use app\models\forms\Login as LoginForm;
 
+/**
+ * Logout action
+ * @package app\actions\admin
+ */
 class Logout extends Auth
 {
+    /**
+     * Main action process
+     */
     public function run() : void
     {
         $form = new LoginForm();

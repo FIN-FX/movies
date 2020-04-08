@@ -10,8 +10,16 @@ namespace app\components;
 
 use app\models\forms\Login as LoginForm;
 
+/**
+ * Component for routing requests to actions
+ * @package app\components
+ */
 class Route
 {
+    /**
+     * Shows if user authorized
+     * @var bool
+     */
     public static $isAdmin = false;
 
     /**
@@ -28,6 +36,7 @@ class Route
         $form = new LoginForm();
         self::$isAdmin = $form->isAuthorized();
 
+        // Load defined URLs
         $data = new Urls();
         $parsed = parse_url($_SERVER['REQUEST_URI']);
         $path = $parsed['path'] ?? '';
@@ -47,6 +56,7 @@ class Route
         $instance = (new $actionName);
         $instance->view = new View();
         $instance->beforeRun();
+        // Call defined action with params
         if (method_exists($instance, 'run')) {
             call_user_func_array([$instance, 'run'], $params);
         }

@@ -12,6 +12,10 @@ use app\models\Client;
 use app\models\Order as Model;
 use app\components\DB;
 
+/**
+ * Form for ordering places in cinema
+ * @package app\models\forms
+ */
 class Order extends Model
 {
     /**
@@ -19,6 +23,9 @@ class Order extends Model
      */
     public $client;
 
+    /**
+     * @var array
+     */
     public $places;
 
     public function __construct(Client $client)
@@ -26,9 +33,21 @@ class Order extends Model
         $this->client = $client;
     }
 
+    /**
+     * @return bool
+     */
     public function validate() : bool
     {
-        $this->id_client = $this->client->id;
+        if ($this->client->id) {
+            $this->id_client = $this->client->id;
+        } else {
+            $this->error = 'Client not defined. Please try again later.';
+            return false;
+        }
+        if (empty($this->places)) {
+            $this->error = 'You must choose your places.';
+            return false;
+        }
         // Check if booked
         $booked = parent::getBookedPlaces($this->id_movie, $this->id_session);
         foreach ($this->places as $place) {
@@ -38,9 +57,13 @@ class Order extends Model
                 return false;
             }
         }
-        return parent::validate();
+        return true;
     }
 
+    /**
+     * Saving multiple places for one order
+     * @return bool
+     */
     public function saveMultiple()
     {
         $db = DB::getInstance();
@@ -55,5 +78,14 @@ class Order extends Model
         }
         $db->commit();
         return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function save(): bool
+    {
+        parent::validate();
+        return parent::save();
     }
 }

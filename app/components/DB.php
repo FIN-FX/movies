@@ -8,6 +8,10 @@
 
 namespace app\components;
 
+/**
+ * Singleton for connection to database
+ * @package app\components
+ */
 class DB
 {
     private static $instance;

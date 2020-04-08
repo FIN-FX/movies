@@ -23,7 +23,8 @@ class m1586201864
               `id_session` int(11) NOT NULL,
               `place` varchar(10) NOT NULL,
               `created_at` int(11) NOT NULL,
-              PRIMARY KEY (`id`)
+              PRIMARY KEY (`id`),
+              KEY `INDEX_movie_sess_created` (`id_movie`,`id_session`,`created_at`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
         ');
         return $stmt->execute();

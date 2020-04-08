@@ -10,6 +10,10 @@ namespace app\models;
 
 use app\components\DB;
 
+/**
+ * Model for sessions table
+ * @package app\models
+ */
 class Session extends Model
 {
     const TABLE = 'sessions';
@@ -18,7 +22,11 @@ class Session extends Model
 
     public $hours;
 
-    public static function findById($id)
+    /**
+     * @param int $id
+     * @return null|static
+     */
+    public static function findById(int $id)
     {
         $db = DB::getInstance();
         $stmt = $db->prepare('SELECT * 
@@ -36,8 +44,10 @@ class Session extends Model
         return NULL;
     }
 
-
-    public static function findAll()
+    /**
+     * @return array
+     */
+    public static function findAll() : array
     {
         $db = DB::getInstance();
         $stmt = $db->prepare('SELECT * 

@@ -19,10 +19,12 @@ class m1586201233
             CREATE TABLE IF NOT EXISTS `'.self::TABLE.'` (
               `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
               `email` varchar(128) NOT NULL,
-              `phone` bigint(20) NOT NULL,
-              PRIMARY KEY (`id`)
+              `phone` varchar(20) NOT NULL,
+              PRIMARY KEY (`id`),
+              KEY `INDEX_email_phone` (`email`,`phone`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
         ');
+
         return $stmt->execute();
     }
 }

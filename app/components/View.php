@@ -8,6 +8,10 @@
 
 namespace app\components;
 
+/**
+ * Component for rendering content from actions
+ * @package app\components
+ */
 class View
 {
     public function load($name, $params = []) : void

@@ -8,6 +8,10 @@
 
 namespace app\components;
 
+/**
+ * Main routing config
+ * @package app\components
+ */
 class Urls
 {
     public $data;

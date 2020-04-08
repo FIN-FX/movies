@@ -15,12 +15,27 @@ use app\models\Session;
 use app\models\Order as OrderModel;
 use app\models\forms\Order as OrderForm;
 
+/**
+ * Action for placing a new order for current movie and session
+ * @package app\actions
+ */
 class Order extends Route
 {
+    /**
+     * Count rows in cinema
+     */
     const COUNT_ROWS = 5;
 
+    /**
+     * Count places in one row
+     */
     const COUNT_PLACES = 10;
 
+    /**
+     * Main action process
+     * @param integer $id
+     * @param integer $sid
+     */
     public function run($id, $sid) : void
     {
         $model = Movie::findById($id);

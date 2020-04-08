@@ -10,6 +10,11 @@ namespace app\components\admin;
 
 use app\components\Route;
 
+/**
+ * Parent class for admin actions
+ * Used to close action from unauthorized users
+ * @package app\components\admin
+ */
 class Auth extends Route
 {
     protected function beforeRun(): void

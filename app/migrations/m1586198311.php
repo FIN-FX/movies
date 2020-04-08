@@ -14,7 +14,6 @@ class m1586198311
 
     public function run()
     {
-        // TODO: Foreign keys
         $db = DB::getInstance();
         $stmt = $db->prepare('
             CREATE TABLE IF NOT EXISTS `'.self::TABLE.'` (

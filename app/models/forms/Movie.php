@@ -10,10 +10,21 @@ namespace app\models\forms;
 
 use app\models\Movie as Model;
 
+/**
+ * Form for adding or changing movie
+ * @package app\models\forms
+ */
 class Movie extends Model
 {
+    /**
+     * Image code for src attribute
+     * @var string
+     */
     public $posterCode;
 
+    /**
+     * @return bool
+     */
     public function validate() : bool
     {
         if(!empty($_FILES["poster"]["tmp_name"]) && is_uploaded_file($_FILES['poster']['tmp_name'])) {

@@ -10,6 +10,10 @@ namespace app\models;
 
 use app\components\DB;
 
+/**
+ * Model for orders table
+ * @package app\models
+ */
 class Order extends Model
 {
     const TABLE = 'orders';
@@ -24,12 +28,33 @@ class Order extends Model
 
     public $place;
 
+    /**
+     * @return bool
+     */
     public function validate() : bool
     {
-        // TODO: rules
+        if (empty($this->id_movie) || !ctype_digit($this->id_movie)) {
+            $this->error = 'Undefined movie.';
+            return false;
+        }
+        if (empty($this->id_client) || !ctype_digit($this->id_client)) {
+            $this->error = 'Undefined client.';
+            return false;
+        }
+        if (empty($this->id_session) || !ctype_digit($this->id_session)) {
+            $this->error = 'Undefined session.';
+            return false;
+        }
+        if (empty($this->place)) {
+            $this->error = 'You must choose your places.';
+            return false;
+        }
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function save() : bool
     {
         $db = DB::getInstance();
@@ -41,7 +66,12 @@ class Order extends Model
         return $stmt->execute([$this->id_movie, $this->id_client, $this->id_session, $this->place, time()]);
     }
 
-    public static function findByMovieAndSession($idMovie, $idSession)
+    /**
+     * @param int $idMovie
+     * @param int $idSession
+     * @return array
+     */
+    public static function findByMovieAndSession(int $idMovie, int $idSession) : array
     {
         $db = DB::getInstance();
         $stmt = $db->prepare('SELECT * 
@@ -61,7 +91,12 @@ class Order extends Model
         return $models;
     }
 
-    public static function getBookedPlaces($idMovie, $idSession)
+    /**
+     * @param int $idMovie
+     * @param int $idSession
+     * @return array
+     */
+    public static function getBookedPlaces(int $idMovie, int $idSession) : array
     {
         $orders = self::findByMovieAndSession($idMovie, $idSession);
         $booked = [];

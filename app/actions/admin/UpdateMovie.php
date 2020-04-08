@@ -11,8 +11,16 @@ namespace app\actions\admin;
 use app\components\admin\Auth;
 use app\models\forms\Movie as MovieForm;
 
+/**
+ * Action for updating movie with current identifier
+ * @package app\actions\admin
+ */
 class UpdateMovie extends Auth
 {
+    /**
+     * Main action process
+     * @param integer $id
+     */
     public function run($id) : void
     {
         $form = MovieForm::findById($id);

@@ -12,8 +12,16 @@ use app\components\Route;
 use app\models\Movie;
 use app\models\Session;
 
+/**
+ * Action for showing details of current movie
+ * @package app\actions
+ */
 class Details extends Route
 {
+    /**
+     * Main action process
+     * @param integer $id
+     */
     public function run($id) : void
     {
         $model = Movie::findById($id);

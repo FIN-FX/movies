@@ -10,6 +10,10 @@ namespace app\models;
 
 use app\components\DB;
 
+/**
+ * Model for movies table
+ * @package app\models
+ */
 class Movie extends Model
 {
     const TABLE = 'movies';
@@ -24,12 +28,29 @@ class Movie extends Model
 
     public $created_at;
 
+    /**
+     * @return bool
+     */
     public function validate() : bool
     {
-        // TODO: rules
+        if (empty($this->title) || strlen($this->title) > 100) {
+            $this->error = 'Title length must be from 1 to 100 symbols.';
+            return false;
+        }
+        if (empty($this->description) || strlen($this->description) > 255) {
+            $this->error = 'Description length must be from 1 to 255 symbols.';
+            return false;
+        }
+        if (empty($this->poster)) {
+            $this->error = 'Please select a file to upload.';
+            return false;
+        }
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function save() : bool
     {
         if (!isset($this->id)) {
@@ -39,6 +60,9 @@ class Movie extends Model
         return $this->update();
     }
 
+    /**
+     * @return bool
+     */
     protected function insert() : bool
     {
         $db = DB::getInstance();
@@ -50,6 +74,9 @@ class Movie extends Model
         return $stmt->execute([$this->title, $this->description, $this->poster, $this->created_at]);
     }
 
+    /**
+     * @return bool
+     */
     protected function update() : bool
     {
         $db = DB::getInstance();
@@ -62,6 +89,10 @@ class Movie extends Model
         return $stmt->execute([$this->title, $this->description, $this->poster, $this->id]);
     }
 
+    /**
+     * @param $id
+     * @return null|static
+     */
     public static function findById($id)
     {
         $db = DB::getInstance();
@@ -80,6 +111,9 @@ class Movie extends Model
         return NULL;
     }
 
+    /**
+     * @return array
+     */
     public static function findAll()
     {
         $db = DB::getInstance();
@@ -100,6 +134,10 @@ class Movie extends Model
         return $models;
     }
 
+    /**
+     * @param $id
+     * @return bool
+     */
     public static function deleteById($id)
     {
         $db = DB::getInstance();
@@ -110,7 +148,12 @@ class Movie extends Model
         return $stmt->execute([$id]);
     }
 
-    public static function findPopular($limit = 5)
+    /**
+     * Searching for most popular movies
+     * @param int $limit
+     * @return array
+     */
+    public static function findPopular(int $limit = 5) : array
     {
         $db = DB::getInstance();
         $stmt = $db->prepare('

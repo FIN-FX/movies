@@ -64,11 +64,11 @@
             <div class="col-md-4">
                 <div class="form-group col-lg-12">
                     <label for="inputEmail">Email</label>
-                    <input type="email" class="form-control" name="email" id="inputEmail" placeholder="Enter email" value="<?//= htmlspecialchars($form->email)?>">
+                    <input type="email" class="form-control" name="email" id="inputEmail" placeholder="Enter email" value="<?= htmlspecialchars($client->email)?>">
                 </div>
                 <div class="form-group col-lg-12">
                     <label for="inputPhone">Telephone</label>
-                    <input type="tel" class="form-control" name="phone" id="inputPhone" placeholder="380993554355" value="<?//= htmlspecialchars($form->phone)?>" maxlength="20">
+                    <input type="tel" class="form-control" name="phone" id="inputPhone" placeholder="380993554355" value="<?= htmlspecialchars($client->phone)?>" maxlength="20">
                 </div>
                 <div class="form-group col-lg-12">
                     <button type="submit" class="btn btn-primary">Submit</button>

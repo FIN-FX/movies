@@ -10,6 +10,10 @@ namespace app\models;
 
 use app\components\DB;
 
+/**
+ * Model for clients table
+ * @package app\models
+ */
 class Client extends Model
 {
     const TABLE = 'clients';
@@ -20,12 +24,26 @@ class Client extends Model
 
     public $phone;
 
+    /**
+     * @return bool
+     */
     public function validate() : bool
     {
-        // TODO: rules
+        if (empty($this->email) || !filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            $this->error = 'Email is invalid.';
+            return false;
+        }
+        $phoneLength = strlen($this->phone);
+        if (empty($this->phone) || $phoneLength < 9 || $phoneLength > 20 || !ctype_digit($this->phone)) {
+            $this->error = 'Phone is invalid. It must be a decimal string with length from 9 to 20.';
+            return false;
+        }
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function save() : bool
     {
         $db = DB::getInstance();
@@ -46,6 +64,11 @@ class Client extends Model
         return true;
     }
 
+    /**
+     * @param $email
+     * @param $phone
+     * @return null|static
+     */
     public static function findByEmailAndPhone($email, $phone)
     {
         $db = DB::getInstance();

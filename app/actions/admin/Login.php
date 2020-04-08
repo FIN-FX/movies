@@ -11,8 +11,15 @@ namespace app\actions\admin;
 use app\components\Route;
 use app\models\forms\Login as LoginForm;
 
+/**
+ * Login action
+ * @package app\actions\admin
+ */
 class Login extends Route
 {
+    /**
+     * Main action process
+     */
     public function run() : void
     {
         $form = new LoginForm();

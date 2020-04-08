@@ -11,8 +11,15 @@ namespace app\actions;
 use app\components\Route;
 use app\models\Movie;
 
+/**
+ * Main action. Shows list of all movies
+ * @package app\actions
+ */
 class Index extends Route
 {
+    /**
+     * Main action process
+     */
     public function run() : void
     {
         $popular = Movie::findPopular();

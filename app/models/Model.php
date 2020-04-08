@@ -8,11 +8,24 @@
 
 namespace app\models;
 
+/**
+ * Main model
+ * @package app\models
+ */
 class Model
 {
+    /**
+     * Model validation error
+     * @var string
+     */
     public $error;
 
-    public function load($params) : bool
+    /**
+     * Loading params from array to attributes
+     * @param array $params
+     * @return bool
+     */
+    public function load(array $params) : bool
     {
         foreach ($params as $key => $param) {
             $this->$key = $param;

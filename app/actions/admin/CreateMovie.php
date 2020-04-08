@@ -11,8 +11,15 @@ namespace app\actions\admin;
 use app\components\admin\Auth;
 use app\models\forms\Movie as MovieForm;
 
+/**
+ * Action for creation new movie
+ * @package app\actions\admin
+ */
 class CreateMovie extends Auth
 {
+    /**
+     * Main action process
+     */
     public function run() : void
     {
         $form = new MovieForm();

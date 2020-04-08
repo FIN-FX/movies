@@ -1,4 +1,4 @@
-#Setup
+# Setup
 
 Setup at Amazon Instance with Amazon Linux AMI 2018.03
 
@@ -26,7 +26,7 @@ docker-compose up -d
 
 docker-compose exec movies php app/migrations/up.php
 
-#Admin
+# Admin
 admin@example.com
 
 123qweasd

@@ -161,7 +161,7 @@ class Movie extends Model
             FROM `'.self::TABLE.'` 
             LEFT JOIN `'.Order::TABLE.'` ON `'.self::TABLE.'`.id = id_movie 
             GROUP BY `'.self::TABLE.'`.id 
-            ORDER BY count DESC
+            ORDER BY count DESC, id DESC
             LIMIT '.(int)$limit.';
         ');
         $stmt->execute();

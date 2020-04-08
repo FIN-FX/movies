@@ -13,8 +13,8 @@ foreach (glob(realpath(dirname(__FILE__)) . '/[!up]*.php') as $filename)
     include_once $filename;
     $class = str_replace('.php', '', basename($filename));
     if ((new $class)->run()) {
-        echo $class::TABLE . ' table successfully created'.PHP_EOL;
+        echo $class . ' migration success'.PHP_EOL;
     } else {
-        echo $class::TABLE . ' table creation failed'.PHP_EOL;
+        echo $class . ' migration failed'.PHP_EOL;
     }
 }
